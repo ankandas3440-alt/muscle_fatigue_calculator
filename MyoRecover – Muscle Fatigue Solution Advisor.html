@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Real-Time Muscle Fatigue Analyser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Main navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">MF</span>Real-Time Muscle Fatigue Analyser</div>
+      <div class="nav-links">
+        <a href="#advisor">Advisor</a>
+        <a class="nav-optional" href="#atlas">Muscle atlas</a>
+        <a class="nav-optional" href="#about">How it works</a>
+        <a href="https://muscleftgai.netlify.app/">AI Help</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <h1>Turn EMG readings into a recovery plan.</h1>
+        <p>Enter your muscle signal and load details to get a clear fatigue score, practical recovery steps and ergonomic guidance.</p>
+      </div>
+      <div class="status-pill">Kinesiology & ergonomics tool</div>
+    </header>
+
+    <main id="advisor" class="advisor-grid">
+      <section class="panel" aria-labelledby="input-title">
+        <div class="panel-header">
+          <h2 id="input-title">Sensor & body inputs</h2>
+          <button type="button" id="demo" class="demo-button">Use demo values</button>
+        </div>
+        <div class="form-body">
+          <div class="field">
+            <label for="mus">Muscle</label>
+            <select id="mus"></select>
+          </div>
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field"><label for="act">Muscle activity (% MVC)</label><input type="number" id="act" min="0" max="100" value="35.93"></div>
+            <div class="field"><label for="mf">Median frequency (Hz)</label><input type="number" id="mf" min="10" max="200" value="53"></div>
+            <div class="field"><label for="base">Fresh baseline MF (Hz)</label><input type="number" id="base" min="20" max="200" value="60"></div>
+            <div class="field"><label for="rms">RMS amplitude (µV)</label><input type="number" id="rms" min="0" placeholder="Optional"></div>
+          </div>
+          <div class="range-head"><label for="pain">Discomfort now</label><span class="range-value"><span id="pv">2</span>/10</span></div>
+          <input type="range" id="pain" min="0" max="10" value="2">
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field"><label for="dur">Continuous load (minutes)</label><input type="number" id="dur" min="0" value="20"></div>
+            <div class="field"><label for="load">Load type</label><select id="load"><option value="s">Static / postural</option><option value="d">Dynamic / lifting</option><option value="r">Repetitive / fine motor</option></select></div>
+            <div class="field"><label for="slp">Sleep last night (h)</label><input type="number" id="slp" min="0" max="14" value="7"></div>
+            <div class="field"><label for="hyd">Hydration today</label><select id="hyd"><option value="g">Good</option><option value="l">Low</option></select></div>
+          </div>
+          <label class="checkbox"><input type="checkbox" id="num"><span>Numbness, tingling, swelling or sharp pain</span></label>
+          <button class="primary-button" id="go" type="button">Generate recovery plan</button>
+        </div>
+      </section>
+
+      <section class="panel result" id="out" aria-live="polite" aria-label="Recovery plan"></section>
+    </main>
+
+    <section class="atlas-section" id="atlas">
+      <div class="section-heading">
+        <h2>Muscle atlas</h2>
+        <p id="cnt"></p>
+      </div>
+      <div class="atlas-toolbar">
+        <input type="search" id="q" placeholder="Search muscle or region…" aria-label="Search muscles">
+        <select class="region-select" id="reg" aria-label="Region"></select>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="panel about-section" id="about">
+      <h2>How the score works</h2>
+      <p>The score blends muscle activity, median-frequency drop from your fresh baseline, discomfort, load duration and the muscle’s typical fatigue profile. Poor sleep and low hydration add a penalty. Fast-twitch muscles receive longer-rest and glycolytic recovery guidance; slow-twitch postural muscles receive micro-break and circulation guidance.</p>
+      <p>The sample dashboard value of 35.93% activity and 53 Hz is labelled “Normal”. A brief spike near 97% and a drop to 0 Hz may indicate electrode movement or contact loss, so re-seat the electrodes before trusting those points.</p>
+    </section>
+
+    <footer>Educational tool for kinesiology and ergonomics, not a medical diagnosis. Persistent pain, numbness or swelling needs a clinician.</footer>
+  </div>
+  <a class="ai-float-link" href="https://muscleftgai.netlify.app/" aria-label="Open AI Help website" title="AI Help">AI</a>
+  <script src="script.js"></script>
+</body>
+</html>
